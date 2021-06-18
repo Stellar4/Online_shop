@@ -1,4 +1,4 @@
-// define shopping_cart basket, shopping_cart_product basket_device, product device
+// define basket shopping_cart, basket_device shopping_cart_product, device product
 const sequelize = require('../db');
 const {DataTypes} = require('sequelize');
 
@@ -15,14 +15,14 @@ const Basket = sequelize.define('basket', {
 })
 
 
-const BasketDevice = sequelize.define('shopping_cart_product', {
+const BasketDevice = sequelize.define('device_product', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
 
-const Device = sequelize.define('product', {
+const Device = sequelize.define('device', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.INTEGER, unique: true, allowNull: false},
+    name: {type: DataTypes.STRING, unique: true, allowNull: false},
     price: {type: DataTypes.INTEGER, allowNull: false},
     rating: {type: DataTypes.INTEGER, defaultValue: 0},
     img: {type: DataTypes.STRING, allowNull: false}
@@ -31,13 +31,13 @@ const Device = sequelize.define('product', {
 
 const Type = sequelize.define('type', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.INTEGER, unique: true, allowNull: false},
+    name: {type: DataTypes.STRING, unique: true, allowNull: false},
 })
 
 
 const Brand = sequelize.define('brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.INTEGER, unique: true, allowNull: false},
+    name: {type: DataTypes.STRING, unique: true, allowNull: false},
 })
 
 
@@ -47,7 +47,7 @@ const Rating = sequelize.define('rating', {
 })
 
 
-const DevicetInfo = sequelize.define('product_info', {
+const DeviceInfo = sequelize.define('device_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.STRING, allowNull: false},
@@ -80,8 +80,8 @@ Rating.belongsTo(Device)
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
 
-Device.hasMany(DevicetInfo)
-DevicetInfo.belongsTo(Device)
+Device.hasMany(DeviceInfo, {as: "info"})
+DeviceInfo.belongsTo(Device)
 
 Type.belongsToMany(Brand, {through: TypeBrand})
 Brand.belongsToMany(Type, {through: TypeBrand})
@@ -95,5 +95,5 @@ module.exports = {
     Type,
     Brand,
     Rating,
-    DevicetInfo
+    DeviceInfo
 }
