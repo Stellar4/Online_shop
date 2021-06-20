@@ -4,6 +4,12 @@ const ApiError = require('../error/ApiError')
 class TypeController{
     async create(req, res){
         const {name} = req.body
+        let type_in_table = await Type.findOne({
+            where: {name}
+        })
+        if (type_in_table){
+            return res.json("Type with this name already exists")
+        }
         const type = await Type.create({name})
         return res.json(type)
     }
