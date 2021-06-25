@@ -50,7 +50,7 @@ class DeviceController{
         return res.json(devices)
     }
 
-    async getOne(req, res){
+    async getOne(req, res, next){
         const {id} = req.params
         try {
             const device = await Device.findOne(
@@ -60,6 +60,20 @@ class DeviceController{
                 },
             )
             return res.json(device)
+        } catch(e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async deleteOne(req, res, next){
+        const {id} = req.params
+        try {
+            await Device.destroy(
+                {
+                    where: {id}
+                }
+            )
+            return res.json("Product is deleted successfully")
         } catch(e) {
             next(ApiError.badRequest(e.message))
         }
