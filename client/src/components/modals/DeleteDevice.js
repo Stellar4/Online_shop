@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import Modal from "react-bootstrap/Modal";
 import {Form, Button} from "react-bootstrap";
-import {createType} from "../../http/deviceAPI";
+import {deleteDevice} from "../../http/deviceAPI";
 
 const DeleteDevice = ({show, onHide}) => {
     const [value, setValue] = useState('')
 
-    // const removeDevice = () => {
-    //     deleteDevice({name: value}).then(data => {
-    //         setValue('')
-    //         onHide()
-    //     })
-    // }
+    const removeDevice = () => {
+        deleteDevice({id: value}).then(data => {
+            setValue('')
+            onHide()
+        })
+    }
 
     return (
         <Modal
@@ -28,7 +28,7 @@ const DeleteDevice = ({show, onHide}) => {
                 <Form>
                     <Form.Control
                         value={value}
-                        onChange={e => setValue(e.target.value)}
+                        onChange={e => setValue(Number(e.target.value))}
                         placeholder={"Введите название типа"}
                     />
                 </Form>

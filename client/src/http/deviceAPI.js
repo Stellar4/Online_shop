@@ -11,6 +11,12 @@ export const fetchTypes = async () => {
     return data
 }
 
+export const deleteType = async (id) => {
+    const {data} = await $authHost.delete('api/type/' + id);
+    return data
+}
+
+
 export const createBrand = async (brand) => {
     const {data} = await $authHost.post('api/brand', brand)
     return data
@@ -20,6 +26,12 @@ export const fetchBrands = async () => {
     const {data} = await $host.get('api/brand', )
     return data
 }
+
+export const deleteBrand = async (id) => {
+    const {data} = await $authHost.delete('api/brand/' + id)
+    return data
+}
+
 
 export const createDevice = async (device) => {
     const {data} = await $authHost.post('api/device', device)
@@ -38,9 +50,10 @@ export const fetchOneDevice = async (id) => {
     return data
 }
 
-// export const deleteType = async (type) => {
-//     const {data} = await 
-// }
+export const deleteDevice = async (id) => {
+    const {data} = await $authHost.delete('api/device/' + id)
+    return data
+}
 
 
 // ------ Добавляю подключение для добавление crud с корзиной ------- //
