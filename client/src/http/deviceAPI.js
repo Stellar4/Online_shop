@@ -38,6 +38,11 @@ export const fetchOneDevice = async (id) => {
     return data
 }
 
+// export const deleteType = async (type) => {
+//     const {data} = await 
+// }
+
+
 // ------ Добавляю подключение для добавление crud с корзиной ------- //
 export const addtoBasket = async (deviceId) => {
     const {response} = await $authHost.post('api/basket', deviceId)
